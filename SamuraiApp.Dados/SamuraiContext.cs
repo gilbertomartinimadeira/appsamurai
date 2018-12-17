@@ -5,9 +5,9 @@ namespace SamuraiApp.Dados
 {
     public class SamuraiContext : DbContext
     {
-        public DbSet<Samurai> Samurais;
-        public DbSet<Frase> Frases;
-        public DbSet<Batalha> Batalhas;
+        public DbSet<Samurai> Samurais { get; set; }
+        public DbSet<Frase> Frases { get; set; }
+        public DbSet<Batalha> Batalhas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
