@@ -18,7 +18,9 @@ namespace SamuraiApp.Dados
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<BatalhaSamurai>()
+                        .HasKey(s => new { s.BatalhaId, s.SamuraiId });
+                
             base.OnModelCreating(modelBuilder);
         }
     }

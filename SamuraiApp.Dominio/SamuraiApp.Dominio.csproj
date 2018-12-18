@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Batalha.cs" />
+    <Compile Include="BatalhaSamurai.cs" />
     <Compile Include="Frase.cs" />
+    <Compile Include="IdentidadeSecreta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samurai.cs" />
   </ItemGroup>
