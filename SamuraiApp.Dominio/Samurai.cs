@@ -14,7 +14,7 @@ namespace SamuraiApp.Dominio
         public int Id { get; set; }
         public String Nome { get; set; }
         public List<Frase> Frases { get; set; }
-        public int BatalhaId { get; set; }
+        public List<BatalhaSamurai> BatalhaSamurai{ get; set; }
 
     }
 }

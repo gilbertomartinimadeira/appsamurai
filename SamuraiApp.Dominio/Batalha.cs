@@ -12,7 +12,9 @@ namespace SamuraiApp.Dominio
         public string Nome { get; set; }
         public DateTime DataInicial { get; set; }
         public DateTime DataFinal { get; set; }
-        public List<Samurai> Samurais { get; set; }    
+        //public List<Samurai> Samurais { get; set; }    
+        public List<BatalhaSamurai> BatalhaSamurai{ get; set; }
+
 
     }
 }
