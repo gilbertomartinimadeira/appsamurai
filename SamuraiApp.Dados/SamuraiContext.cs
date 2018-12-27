@@ -9,11 +9,22 @@ namespace SamuraiApp.Dados
     {                    
         public DbSet<Samurai> Samurais { get; set; }
         public DbSet<Frase> Frases { get; set; }
-        public DbSet<Batalha> Batalhas { get; set; }
+        public DbSet<Batalha> Batalhas { get; set; }       
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database = SamuraiAppDados ;Trusted_Connection= true;");           
+            var loggerFactory = new LoggerFactory();
+
+            #pragma warning disable
+            loggerFactory.AddConsole();
+            #pragma warning restore
+
+
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database = SamuraiAppDados ;Trusted_Connection= true;");        
+            optionsBuilder.UseLoggerFactory(loggerFactory);
+            optionsBuilder.EnableSensitiveDataLogging();
+        
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -24,5 +35,7 @@ namespace SamuraiApp.Dados
                 
             base.OnModelCreating(modelBuilder);
         }
+
+
     }
 }
