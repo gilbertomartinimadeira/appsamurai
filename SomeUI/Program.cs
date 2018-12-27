@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SamuraiApp.Dados;
 using SamuraiApp.Dominio;
 
@@ -8,25 +9,50 @@ namespace SomeUI
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Inserindo Samurai, Aguarde...");
+                       
 
-            InserirSamurai();
+            InserirVariosSamurais();
 
-            Console.WriteLine("Samurai inserido com sucesso!");
+            Console.WriteLine("Vários Samurais inseridos com sucesso!");
 
             Console.ReadLine();
 
         }
 
+        private static void InserirVariosSamurais()
+        {
+            var primeiroSamurai = new Samurai { Nome = "Alan" };
+            var segundoSamurai = new Samurai { Nome = "Gilberto" };
+
+            using(var context = new SamuraiContext())
+            {
+                context.Samurais.AddRange(primeiroSamurai, segundoSamurai);
+
+                context.SaveChanges();
+
+            }
+        }
+
+
+
         private static void InserirSamurai()
         {
-            var samurai = new Samurai { Nome = "Jo" };
+            var samurai = new Samurai { Nome = "Gil" };
 
             using (var context = new SamuraiContext())
             {
                 context.Samurais.Add(samurai);
 
-                context.SaveChanges();
+
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                }
             }
            
         }
