@@ -34,7 +34,13 @@ namespace SomeUI
                 Console.WriteLine(s.Nome);
             });
 
+            var primeiroSamuraiEncontrado = _context.Samurais
+                                                    .OrderByDescending(s => s.Id)
+                                                    .Where(s => s.Nome.ToUpper().StartsWith("X"))
+                                                    .FirstOrDefault();
 
+            Console.WriteLine(primeiroSamuraiEncontrado?.Nome);
+        
         }
 
         private static void ExibirSamurais()
