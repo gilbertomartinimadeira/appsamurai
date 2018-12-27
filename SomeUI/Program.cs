@@ -1,21 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SamuraiApp.Dados;
 using SamuraiApp.Dominio;
 
 namespace SomeUI
 {
-    class Program
+    public class Program
     {
+        private static SamuraiContext _context = new SamuraiContext();
+
         public static void Main(string[] args)
         {
-                       
 
-            InserirVariosSamurais();
 
-            Console.WriteLine("Vários Samurais inseridos com sucesso!");
 
+            MaisConsultas();
             Console.ReadLine();
+
+
+        }
+
+        private static void MaisConsultas()
+        {
+            var inicial = "G";
+
+            var doisPrimeirosSamurais = _context.Samurais
+                                                .Take(2)
+                                                .Where(s => s.Nome.ToUpper().StartsWith(inicial))
+                                                .ToList();
+
+            doisPrimeirosSamurais.ForEach(s => {
+                Console.WriteLine(s.Nome);
+            });
+
+
+        }
+
+        private static void ExibirSamurais()
+        {
+            var samurais = _context.Samurais
+                                   .OrderByDescending(s => s.Nome)
+                                   .ToList();
+
+            samurais.ForEach(s =>
+            {
+                Console.WriteLine($"Samurai: {s.Nome}");
+            });
 
         }
 
@@ -24,37 +55,31 @@ namespace SomeUI
             var primeiroSamurai = new Samurai { Nome = "Alan" };
             var segundoSamurai = new Samurai { Nome = "Gilberto" };
 
-            using(var context = new SamuraiContext())
-            {
-                context.Samurais.AddRange(primeiroSamurai, segundoSamurai);
+            _context.Samurais.AddRange(primeiroSamurai, segundoSamurai);
 
-                context.SaveChanges();
+            _context.SaveChanges();
 
-            }
+
         }
-
-
 
         private static void InserirSamurai()
         {
             var samurai = new Samurai { Nome = "Gil" };
 
-            using (var context = new SamuraiContext())
+
+            _context.Samurais.Add(samurai);
+
+            try
             {
-                context.Samurais.Add(samurai);
-
-
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-
-                    Console.WriteLine(ex.Message);
-                }
+                _context.SaveChanges();
             }
-           
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
         }
+
     }
+
 }
