@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using SamuraiApp.Dados;
 using SamuraiApp.Dominio;
 
@@ -15,10 +16,19 @@ namespace SomeUI
 
 
 
-            MaisConsultas();
+            ConsultaUsandoLike();
+
             Console.ReadLine();
 
 
+        }
+
+        private static void ConsultaUsandoLike()
+        {
+            var primeiroSamuraiComInicialG = _context.Samurais
+                                  .Where(s => EF.Functions.Like(s.Nome, "G%")).FirstOrDefault();
+
+            Console.WriteLine(primeiroSamuraiComInicialG.Nome);
         }
 
         private static void MaisConsultas()
@@ -40,8 +50,15 @@ namespace SomeUI
                                                     .FirstOrDefault();
 
             Console.WriteLine(primeiroSamuraiEncontrado?.Nome);
-        
+
+            Console.WriteLine("Gerando uma query last com o 'OrderBy'");
+            var ultimoSamuraiEncontrado = _context.Samurais.OrderBy(s => s.Nome).LastOrDefault(); 
+
+            Console.WriteLine(ultimoSamuraiEncontrado?.Nome);
+
         }
+
+
 
         private static void ExibirSamurais()
         {
