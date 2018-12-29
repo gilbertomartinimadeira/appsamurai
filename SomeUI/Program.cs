@@ -16,20 +16,38 @@ namespace SomeUI
 
 
 
-            ConsultaUsandoLike();
+            ConsultasUsandoLike();
 
             Console.ReadLine();
 
 
         }
 
-        private static void ConsultaUsandoLike()
+        private static void ConsultasUsandoLike()
         {
             var primeiroSamuraiComInicialG = _context.Samurais
-                                  .Where(s => EF.Functions.Like(s.Nome, "G%")).FirstOrDefault();
+                                  .Where(s => EF.Functions.Like(s.Nome, "G%"))
+                                  .FirstOrDefault();
+
+            var todosOsSamuraisCom_A_noNome = _context.Samurais
+                                                      .Where(s => EF.Functions.Like(s.Nome.ToUpper(), "%A%"))
+                                                      .ToList();
+
+
 
             Console.WriteLine(primeiroSamuraiComInicialG.Nome);
+
+            Console.WriteLine("Exibindo Todos Os Samurais Com A no nome");
+
+
+
+            todosOsSamuraisCom_A_noNome.ForEach(s => {
+                Console.WriteLine(s.Nome);
+            });
+        
         }
+
+
 
         private static void MaisConsultas()
         {
