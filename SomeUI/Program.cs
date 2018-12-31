@@ -16,11 +16,20 @@ namespace SomeUI
 
 
 
-            ConsultasUsandoLike();
+            AtualizarSamurai();
 
             Console.ReadLine();
 
 
+        }
+
+        private static void AtualizarSamurai()
+        {
+            var samurai = _context.Samurais.FirstOrDefault();
+
+            samurai.Nome += "San";
+
+            _context.SaveChanges();
         }
 
         private static void ConsultasUsandoLike()
@@ -74,9 +83,7 @@ namespace SomeUI
 
             Console.WriteLine(ultimoSamuraiEncontrado?.Nome);
 
-        }
-
-
+        }    
 
         private static void ExibirSamurais()
         {
