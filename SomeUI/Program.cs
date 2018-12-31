@@ -14,11 +14,38 @@ namespace SomeUI
         public static void Main(string[] args)
         {
 
-            ExecutarVariasOperacoes();
+
+            UpdateDesconectado();           
       
             Console.ReadLine();
 
 
+        }
+
+        private static void UpdateDesconectado()
+        {
+            var batalha = _context.Batalhas.FirstOrDefault();
+
+            batalha.DataFinal = new DateTime(1561, 10, 1);
+
+            using (var ctx = new SamuraiContext())
+            {
+                ctx.Batalhas.Update(batalha);
+
+                ctx.SaveChanges();
+            }
+        }
+
+        private static void InserirBatalha()
+        {
+            _context.Batalhas.Add(
+                new Batalha() {
+                    Nome = "Batalha de Okehazama",
+                    DataInicial = new DateTime(1560, 5, 1),
+                    DataFinal= new DateTime(1560, 6, 15)
+                });
+
+            _context.SaveChanges();
         }
 
         private static void ExecutarVariasOperacoes()
