@@ -16,11 +16,21 @@ namespace SomeUI
 
 
 
-            AtualizarSamurai();
+            AtualizarVariosSamurais();
+
 
             Console.ReadLine();
 
 
+        }
+
+        private static void AtualizarVariosSamurais()
+        {
+            var samurais = _context.Samurais.ToList();
+
+            samurais.ForEach(s => s.Nome += "San");
+
+            _context.SaveChanges();
         }
 
         private static void AtualizarSamurai()
@@ -55,9 +65,7 @@ namespace SomeUI
             });
         
         }
-
-
-
+    
         private static void MaisConsultas()
         {
             var inicial = "G";
