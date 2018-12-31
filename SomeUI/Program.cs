@@ -14,13 +14,22 @@ namespace SomeUI
         public static void Main(string[] args)
         {
 
-
-
-            AtualizarVariosSamurais();
-
-
+            ExecutarVariasOperacoes();
+      
             Console.ReadLine();
 
+
+        }
+
+        private static void ExecutarVariasOperacoes()
+        {
+            var primeiroSamurai = _context.Samurais.FirstOrDefault();
+            primeiroSamurai.Nome += "Hiro";
+            var samurai = new Samurai { Nome = "Byakuya" };
+
+            _context.Samurais.Add(samurai);
+
+            _context.SaveChanges();
 
         }
 
