@@ -12,14 +12,21 @@ namespace SomeUI
         private static SamuraiContext _context = new SamuraiContext();
 
         public static void Main(string[] args)
-        {
-
-
-            UpdateDesconectado();           
+        {        
+            RemocaoDeObjetoRastreado();
       
             Console.ReadLine();
 
 
+        }
+
+        private static void RemocaoDeObjetoRastreado()
+        {
+            var samurai = _context.Samurais.FirstOrDefault(s => EF.Functions.Like(s.Nome, "Gil%"));
+
+            _context.Remove(samurai);
+
+            _context.SaveChanges();
         }
 
         private static void UpdateDesconectado()
