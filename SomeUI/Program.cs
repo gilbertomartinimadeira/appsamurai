@@ -12,11 +12,35 @@ namespace SomeUI
         private static SamuraiContext _context = new SamuraiContext();
 
         public static void Main(string[] args)
-        {        
-            RemocaoDeObjetoRastreado();
+        {
+            RemovePorId(14);
       
             Console.ReadLine();
 
+
+        }
+
+        private static void RemovePorId(int id)
+        {
+            int linhasAfetadas = _context.Database.ExecuteSqlCommand("exec DeletarPorId {0}", id);
+
+            Console.WriteLine($"{linhasAfetadas} linhas afetadas");
+            /*
+            CREATE PROCEDURE DeletarPorId
+            @ID INT
+            AS
+            BEGIN
+                BEGIN TRY
+                    DELETE FROM SamuraiAppDados.dbo.Samurais where Id = @ID;
+                        END TRY
+
+                BEGIN CATCH
+
+                END CATCH
+
+
+            END;
+            */
 
         }
 
