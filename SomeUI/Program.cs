@@ -15,11 +15,26 @@ namespace SomeUI
         {
 
 
-            InserirEntidadeComMultiplosFilhos();
+            InserirFilhosEmEntidadeExistente();
 
             Console.ReadLine();
 
 
+        }
+
+        private static void InserirFilhosEmEntidadeExistente()
+        {
+            var samurai = _context.Samurais.First();
+
+            var frases = new List<Frase>()
+            {
+                new Frase { Texto = "Não há honra na morte"},
+                new Frase { Texto = "Me deram essa espada, agora posso cortar meus inimigos"},
+            };
+
+            samurai.Frases = frases;
+
+            _context.SaveChanges();
         }
 
         private static void InserirEntidadeComMultiplosFilhos()
