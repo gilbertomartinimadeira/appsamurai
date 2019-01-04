@@ -13,10 +13,30 @@ namespace SomeUI
 
         public static void Main(string[] args)
         {
-            InserirNovaRelacaoPKFK();
-      
+
+
+            InserirEntidadeComMultiplosFilhos();
+
             Console.ReadLine();
 
+
+        }
+
+        private static void InserirEntidadeComMultiplosFilhos()
+        {
+            var samurai = new Samurai() {
+                Nome = "Soichiro",
+                Frases = new List<Frase>()
+                {
+                    new Frase { Texto = "Me chuta que te atiro no poço"},
+                    new Frase { Texto = "Não o perdoo"},
+                    new Frase { Texto = "Eu te mandarei direto pro inferno."}
+                }
+            };
+
+            _context.Samurais.Add(samurai);
+
+            _context.SaveChanges();
 
         }
 
