@@ -15,10 +15,24 @@ namespace SomeUI
         {
 
 
-            InserirFilhosEmEntidadeExistente();
-
+            ObterSamuraiPorId(1008);
             Console.ReadLine();
 
+
+        }
+
+        private static void AdicionarFilhosEmEntidadeExistenteNaoRastreada(int id)
+        {
+            var frases = new List<Frase>
+            {
+                new Frase { Texto = "Esse e meu estilo samurai", SamuraiId = id},
+                new Frase { Texto = "Eles tem armas de fogo, nós temos coragem", SamuraiId = id}
+            };
+
+            _context.Frases.AddRange(frases);
+
+            _context.SaveChanges();
+            
 
         }
 
@@ -208,7 +222,14 @@ namespace SomeUI
 
             Console.WriteLine(ultimoSamuraiEncontrado?.Nome);
 
-        }    
+        }
+
+        private static void ObterSamuraiPorId(int id)
+        {
+            var samurai = _context.Samurais.Where(s => s.Id == id).FirstOrDefault();
+
+            Console.WriteLine(samurai);
+        }
 
         private static void ExibirSamurais()
         {

@@ -17,5 +17,17 @@ namespace SamuraiApp.Dominio
         public List<BatalhaSamurai> BatalhaSamurai { get; set; }
         public IdentidadeSecreta IdentidadeSecreta { get; set; }
 
+        public override string ToString()
+        {
+            var samuraiString = "Nome: " + this.Nome;
+
+            foreach(var s in this.Frases)
+            {
+                samuraiString += "\""+ s.Texto + "\"\n";
+            }
+
+            return samuraiString;
+        }
+
     }
 }
