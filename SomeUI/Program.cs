@@ -13,11 +13,26 @@ namespace SomeUI
 
         public static void Main(string[] args)
         {
-            RemovePorId(14);
+            InserirNovaRelacaoPKFK();
       
             Console.ReadLine();
 
 
+        }
+
+        private static void InserirNovaRelacaoPKFK()
+        {
+            var samurai = new Samurai()
+            {
+                Nome = "Kojiro Yamamoto",
+                Frases = new List<Frase>() {
+                                               new Frase() { Texto = "Eu Vim pra te salvar"}
+                                           }
+            };
+
+            _context.Samurais.Add(samurai);        
+            _context.SaveChanges();
+                
         }
 
         private static void RemovePorId(int id)
