@@ -226,7 +226,10 @@ namespace SomeUI
 
         private static void ObterSamuraiPorId(int id)
         {
-            var samurai = _context.Samurais.Where(s => s.Id == id).FirstOrDefault();
+            var samurai = _context.Samurais
+                                  .Where(s => s.Id == id)
+                                  .Include(s => s.Frases)
+                                  .FirstOrDefault();
 
             Console.WriteLine(samurai);
         }

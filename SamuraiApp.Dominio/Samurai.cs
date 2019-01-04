@@ -19,7 +19,7 @@ namespace SamuraiApp.Dominio
 
         public override string ToString()
         {
-            var samuraiString = "Nome: " + this.Nome;
+            var samuraiString = "Nome: " + this.Nome +"\n";
 
             foreach(var s in this.Frases)
             {
