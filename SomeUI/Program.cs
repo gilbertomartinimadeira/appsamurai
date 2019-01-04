@@ -13,11 +13,48 @@ namespace SomeUI
 
         public static void Main(string[] args)
         {
+            ModificarObjetosRelacionadosSemRastreamento();
 
-            var res = ProjecaoComObjetosRelacionados();
-            Console.ReadLine();
+            Console.ReadLine();                   
 
-            
+
+        }
+
+        private static void ModificarObjetosRelacionadosSemRastreamento()
+        {
+            var samurai = _context.Samurais.Include(s => s.Frases).FirstOrDefault();
+            var primeiraFrase = samurai.Frases[0];
+
+            primeiraFrase.Texto += ", Ouviu bem?";
+
+            #region O Jeito Errado
+            //using (var outroContexto = new SamuraiContext())
+            //{
+            //    outroContexto.Frases.Update(primeiraFrase);
+
+            //    outroContexto.SaveChanges();
+            //}
+            #endregion
+            #region O Jeito Certo
+            using (var outroContexto = new SamuraiContext())
+            {
+                outroContexto.Entry(primeiraFrase).State = EntityState.Modified;
+                outroContexto.SaveChanges();
+            }
+            #endregion
+
+        }
+
+        private static void FiltrarPelosFilhos()
+        {
+            var samuraisEgoistasQueFalamDeSi = _context.Samurais
+                                                       .Where(s => s.Frases.Any(f => f.Texto.ToUpper().StartsWith("EU")))
+                                                       .ToList();
+            foreach(var s in samuraisEgoistasQueFalamDeSi)
+            {
+                Console.WriteLine(s);
+            }
+
         }
 
         private static List<Samurai> ProjecaoComObjetosRelacionados()
