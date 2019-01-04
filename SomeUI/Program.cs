@@ -14,11 +14,42 @@ namespace SomeUI
         public static void Main(string[] args)
         {
 
-
-            ObterSamuraiPorId(1008);
+            var res = ProjecaoComObjetosRelacionados();
             Console.ReadLine();
 
+            
+        }
 
+        private static List<Samurai> ProjecaoComObjetosRelacionados()
+        {
+            //var novosObjetos = _context.Samurais
+            //                           .Select(s => new { Id = s.Id, Nome = s.Nome , Frases  = s.Frases.Count()})
+            //                           .ToList();
+
+            //var novosObjetos = _context.Samurais
+            //                           .Select(s => new { Id = s.Id, Nome = s.Nome, Frases = s.Frases
+            //                                                                                  .Where(f => f.Texto
+            //                                                                                               .ToUpper()
+            //                                                                                               .StartsWith('E')) })
+            //                           .ToList();
+
+            //SOLUÇÃO
+            var samurais = _context.Samurais.ToList();
+                                   
+            var frases = _context.Frases
+                                 .Where(f => f.Texto
+                                 .ToUpper()
+                                 .StartsWith('E'))
+                                 .ToList();
+
+            return samurais;
+        }
+
+        private static List<dynamic> ProjecaoComSelect()
+        {
+            var novosObjetos = _context.Samurais.Select(s => new { Id = s.Id, Nome = s.Nome }).ToList();
+
+            return novosObjetos.ToList<dynamic>();
         }
 
         private static void AdicionarFilhosEmEntidadeExistenteNaoRastreada(int id)
