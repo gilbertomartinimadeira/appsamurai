@@ -21,7 +21,7 @@ namespace SamuraiApp.Dados
             #pragma warning restore
 
 
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database = SamuraiAppDados ;Trusted_Connection= true;");        
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database = SamuraiWpfDemo ;Trusted_Connection= true;");        
             optionsBuilder.UseLoggerFactory(loggerFactory);
             optionsBuilder.EnableSensitiveDataLogging();
         

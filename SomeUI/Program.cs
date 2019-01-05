@@ -35,6 +35,7 @@ namespace SomeUI
             //    outroContexto.SaveChanges();
             //}
             #endregion
+
             #region O Jeito Certo
             using (var outroContexto = new SamuraiContext())
             {
